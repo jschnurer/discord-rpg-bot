@@ -16,5 +16,8 @@ Any member of your server can type commands to the bot which will be executed.
 - `!roll` - Rolls dice notation. Examples: !pickone first,second,third; !pickone attack, run, negotiate
 - `!sethp` - Sets your current and max hp. Examples: !sethp 35; !sethp 6
 
-# Adding new commands
+## Adding new commands
 Add the command in the same format as the others in the ./commands folder. Then update ./commands.js to import your command and add it to the list.
+
+# Bot memory
+The bot remembers. Commands receive both the original message and a botMemory object. The botMemory object can be written to and read from to remember data between commands. The botMemory object also has a `save` method. When called, it will attempt to write the botMemory to `./botMemory.json`. When the script starts, if that file exists, it will read from it and set the bot's initial memory.
