@@ -3,7 +3,7 @@ const stripMentions = require("../utilities/stripMentions");
 
 module.exports = {
   isMatch: (msg) => msg.content.toLowerCase().startsWith('!damage'),
-  helpText: "Damages a user's hp via dice notation. They must first set their hp using `!sethp`. If no user is mentioned, damages your own hp. Examples: `!damage 1d6+1`, `!damage @person 1d10+2`",
+  helpText: "Damages a user's hp via dice notation (or number). They must first set their hp using `!sethp`. If no user is mentioned, damages your own hp. Examples: `!damage 1d6+1`, `!damage @person 1d10+2`",
   execute: (msg, botMemory) => {
     try {
       const mention = msg.mentions.users.first();
