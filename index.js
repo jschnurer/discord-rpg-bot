@@ -33,11 +33,11 @@ bot.on('ready', () => {
 bot.on('message', msg => {
   if (msg.content.toLowerCase() === "!help") {
     displayHelp(msg);
+    return;
   }
 
-  const cmdKeys = Object.keys(commands);
-  for (let i = 0; i < cmdKeys.length; i++) {
-    const cmd = commands[cmdKeys[i]];
+  for (let i = 0; i < commands.length; i++) {
+    const cmd = commands[i];
 
     if (cmd.isMatch(msg)) {
       cmd.execute(msg, botMemory);
