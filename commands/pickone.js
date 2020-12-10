@@ -1,4 +1,5 @@
 module.exports = {
+  command: "!pickone",
   isMatch: (msg) => msg.content.toLowerCase().startsWith('!pickone'),
   helpText: "Picks an item from a comma-delimited list. Examples: `!pickone first,second,third;` `!pickone attack, run, negotiate`",
   execute: (msg) => {

@@ -1,7 +1,7 @@
 module.exports = {
-  command: "!hp",
-  isMatch: (msg) => msg.content.toLowerCase().startsWith('!hp'),
-  helpText: "Checks the hp of a user. If no user is mentioned, returns your own hp. Examples: `!hp`, `!hp @person`",
+  command: "!forgethp",
+  isMatch: (msg) => msg.content.toLowerCase().startsWith('!forgethp'),
+  helpText: "Instructs the bot to forget the hp of a user. If no user is mentioned, forgets your own hp. Examples: `!forgethp`, `!forgethp @person`",
   execute: (msg, botMemory) => {
     try {
       const mention = msg.mentions.users.first();
@@ -15,12 +15,11 @@ module.exports = {
   
       const oldPc = botMemory.pcs.find(x => x.name === name);
       if (oldPc) {
-        msg.channel.send(`❤️ ${oldPc.name}: ${oldPc.hp}/${oldPc.maxhp} HP`
-          + (oldPc.temphp
-            ? `, 💙 ${oldPc.temphp} temphp`
-            : ""));
+        botMemory.pcs = botMemory.pcs.filter(x => x.name !== name);
+        botMemory.save();
+        msg.channel.send(`I've forgotten ${name}'s hp.`);
       } else {
-        msg.channel.send(`I don't know ${name}'s hp. They can set their own hp by using \`!sethp <amount>\``);
+        msg.channel.send(`I didn't know ${name}'s hp to begin with.`);
       }
     } catch (err) {
       console.log(err);

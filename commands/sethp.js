@@ -1,4 +1,5 @@
 module.exports = {
+  command: "!sethp",
   isMatch: (msg) => msg.content.toLowerCase().startsWith('!sethp'),
   helpText: "Sets your current and max hp. Examples: `!sethp 35;` `!sethp 6`",
   execute: (msg, botMemory) => {
@@ -33,7 +34,10 @@ module.exports = {
   
       botMemory.save();
   
-      msg.channel.send(`💖 ${name}: ${hpAmt}/${hpAmt} hp.`);
+      msg.channel.send(`💖 ${name}: ${hpAmt}/${hpAmt} HP`
+        + (oldPc.temphp
+          ? `, 💙 ${oldPc.temphp} temphp`
+          : ""));
     } catch (err) {
       console.log(err);
       msg.reply("I didn't understand your syntax. Try \"!help\".");

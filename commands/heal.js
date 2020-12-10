@@ -2,6 +2,7 @@ const { rollNotation } = require("../utilities/diceRoller");
 const stripMentions = require("../utilities/stripMentions");
 
 module.exports = {
+  command: "!heal",
   isMatch: (msg) => msg.content.toLowerCase().startsWith('!heal'),
   helpText: "Heals a user's hp via dice notation (or number). They must first set their hp using `!sethp`. If no user is mentioned, heals your own hp. Examples: `!heal 1d6+1`, `!heal @person 1d10+2`",
   execute: (msg, botMemory) => {
@@ -18,7 +19,7 @@ module.exports = {
       const oldPc = botMemory.pcs.find(x => x.name === name);
 
       if (!oldPc) {
-        msg.channel.send("I don't know that person's hp. They can set their own hp by using `!sethp <amount>`");
+        msg.channel.send(`I don't know ${name}'s hp. They can set their own hp by using \`!sethp <amount>\``);
         return;
       }
 
@@ -40,7 +41,10 @@ module.exports = {
 
       botMemory.save();
 
-      msg.channel.send(`🩹 ${oldPc.name} heals ${result} damage and is restored to ${oldPc.hp}/${oldPc.maxhp} HP!`);
+      msg.channel.send(`🩹 ${oldPc.name} heals ${result} damage and is restored to ${oldPc.hp}/${oldPc.maxhp} HP`
+        + (oldPc.temphp
+          ? `, 💙 ${oldPc.temphp} temphp!`
+          : "!"));
     } catch (err) {
       console.log(err);
       msg.reply("I didn't understand your syntax. Try \"!help\".");

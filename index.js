@@ -32,14 +32,18 @@ bot.on('ready', () => {
 
 bot.on('message', msg => {
   if (msg.content.toLowerCase() === "!help") {
+    console.log("Executing command !help");
     displayHelp(msg);
     return;
   }
 
-  for (let i = 0; i < commands.length; i++) {
-    const cmd = commands[i];
+  const cmdKeys = Object.keys(commands);
+
+  for (let i = 0; i < cmdKeys.length; i++) {
+    const cmd = commands[cmdKeys[i]];
 
     if (cmd.isMatch(msg)) {
+      console.log("Executing command " + cmd.command);
       cmd.execute(msg, botMemory);
       break;
     }

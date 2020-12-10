@@ -1,6 +1,7 @@
 const { rollNotation } = require("../utilities/diceRoller");
 
 module.exports = {
+  command: "!roll",
   isMatch: (msg) => msg.content.toLowerCase().startsWith('!roll'),
   helpText: "Rolls dice notation. Examples: `!pickone first,second,third`; `!pickone attack, run, negotiate`",
   execute: (msg) => {
