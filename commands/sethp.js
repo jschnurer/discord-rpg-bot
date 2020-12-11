@@ -20,7 +20,7 @@ module.exports = {
         return;
       }
   
-      const oldPc = botMemory.pcs.find(x => x.name === name);
+      let oldPc = botMemory.pcs.find(x => x.name === name);
       if (oldPc) {
         oldPc.hp = hpAmt;
         oldPc.maxhp = hpAmt;
@@ -30,6 +30,7 @@ module.exports = {
           hp: hpAmt,
           maxhp: hpAmt,
         });
+        oldPc = botMemory.pcs[botMemory.pcs.length - 1];
       }
   
       botMemory.save();
