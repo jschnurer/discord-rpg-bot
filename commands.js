@@ -8,4 +8,5 @@ module.exports = {
   heal: require("./commands/heal"),
   temphp: require("./commands/temphp"),
   forgethp: require("./commands/forgethp"),
+  joke: require("./commands/joke"),
 };
